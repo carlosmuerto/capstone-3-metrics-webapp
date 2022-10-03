@@ -1,14 +1,14 @@
-import { GET_DETAILS, GET_STOCK, GET_DETAILS_ERROR } from './detailsServices';
+import { GET_DETAILS, GET_DETAILS_SUCCESS, GET_DETAILS_ERROR } from './detailsServices';
 
 const initialState = {
   details: [
     {
       symbol: '',
-      name: '',
+      name: 'loading',
       exchange: '',
       price: 0,
       previousClose: 0,
-      changesPercentage: '',
+      changePercentage: '',
       dayHigh: 0,
       dayLow: 0,
       yearHigh: 0,
@@ -19,15 +19,26 @@ const initialState = {
 
 const detailsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_STOCK:
-      return { ...state, pending: false, details: action.payload };
     case GET_DETAILS:
-      return { ...state, pending: true };
+      return {
+        ...state,
+        pending: true,
+      };
+    case GET_DETAILS_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        details: action.details,
+      };
     case GET_DETAILS_ERROR:
-      return { ...state, pending: false, error: action.payload };
+      return {
+        ...state,
+        pending: false,
+        details: action.payload,
+      };
     default:
       return state;
   }
-};
+}
 
 export default detailsReducer;
