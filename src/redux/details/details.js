@@ -17,7 +17,6 @@ const initialState = {
   ],
 };
 
-
 const detailsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_STOCK:
