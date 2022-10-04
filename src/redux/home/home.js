@@ -7,7 +7,7 @@ const RESTORE_STOCKS = 'RESTORE_STOCKS';
 
 const restoreStocks = (payload) => ({ type: RESTORE_STOCKS, payload });
 
-const filterStocks = (payload) => ({ type: FILTER_STOCKS, payload });
+const filterStocks = (newArray, savedStocks) => ({ type: FILTER_STOCKS, payload: [newArray, savedStocks] });
 
 const stocksReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -18,9 +18,9 @@ const stocksReducer = (state = initialState, action) => {
       };
     case GET_STOCKS_SUCCESS:
       {
-        const { data } = action.stocks;
+        const data = action.stocks;
         const subset = [];
-        data.$.map((stock) => {
+        data.map((stock) => {
           subset.push({
             symbol: stock.symbol,
             price: stock.price,
@@ -43,7 +43,9 @@ const stocksReducer = (state = initialState, action) => {
     case FILTER_STOCKS:
       return {
         ...state,
-        stocks: state.stocks.filter((stock) => stock.symbol.toLowerCase().includes(action.payload)),
+        pending: false,
+        stocks: action.payload[0],
+        savedStocks: action.payload[1],
       };
     case RESTORE_STOCKS:
       return {
