@@ -5,60 +5,64 @@ import { filterStocks } from '../../redux/home/home';
 import { detailsStock } from '../../redux/slices/detailsServices';
 
 const Home = () => {
-  const state = useSelector((state) => state);
-  const searched = useSelector((state) => state.stocks.stocks);
-  const dispatch = useDispatch();
+const state = useSelector((state) => state);
+const dispatch = useDispatch();
 
-  const clickEvent = (e) => {
-    const id_stock = e.target.id;
-    window.scrollTo(0, 0);
-    dispatch(detailsStock(id_stock));
-  };
+const clickEvent = (e) => {
+  const id_stock = e.target.id;
+  window.scrollTo(0, 0);
+  dispatch(detailsStock(id_stock));
+};
 
-  const checkStocks = () => {
-    if (searched.length === 0) {
-      return (
-        <div className="home__container">
-          <h2 className="home__title">No stocks found</h2>
-        </div>
-      );
+const searchStock = (e) => {
+  const savedStocks = state.slice(0, 12);
+  const newArray = [state[0]];
+  state.slice(1, 12).forEach((stock) => {
+    if (stock.symbol.includes(e.target.value.toUpperCase())) {
+      newArray.push(stock);
     }
-    return (
-      <div className="home__container">
-        {searched.map((stock) => (
-          <NavLink
-            to="/details"
-            className="home__link"
-            key={stock.symbol}
-            id={stock.symbol}
-            onClick={clickEvent}
-          >
-            <div className="home__card">
-              <h2 className="home__card--title">{stock.symbol}</h2>
-              <h3 className="home__card--subtitle">{stock.name}</h3>
-              <p className="home__card--text">{stock.exchange}</p>
-            </div>
-          </NavLink>
-        ))}
+  });
+  if (newArray.length === 1) {
+    dispatch(filterStocks(savedStocks));
+  } else {
+    dispatch(filterStocks(newArray));
+  }
+};
+
+const mainStock = state.slice(0, 1).map((stock) => (
+  <div key={stock.symbol} className="stock-container">
+    <NavLink to={`/${stock.symbol}`} id={stock.symbol} className="stock-link" onClick={clickEvent}>
+      {stock.symbol}: ${stock.price.toFixed(2)}
+    </NavLink>
+    <p className="stock-name">{stock.name}</p>
+  </div>
+));
+
+const displayFiltered = state.slice(1, 12).map((stock) => (
+  <NavLink to={`/${stock.symbol}`} id={stock.symbol} className="stock-link" onClick={clickEvent} key={stock.symbol}>
+    {stock.symbol}: ${stock.price.toFixed(2)}
+    <p className="stock-name">{stock.name}</p>
+  </NavLink>
+));
+
+const displayStocks = state.slice(1, 12).map((stock) => (
+  <NavLink to={`/${stock.symbol}`} id={stock.symbol} className="stock-link" onClick={clickEvent} key={stock.symbol}>
+    {stock.symbol}: ${stock.price.toFixed(2)}
+    <p className="stock-name">{stock.name}</p>
+  </NavLink>
+));
+
+return (
+  <div className="home-container">
+    <div className="home-main">
+      {mainStock}
+      <div className="search-container">
+        <input type="text" className="search-input" placeholder="Search" onChange={searchStock} />
       </div>
-    );
-  };
-
-  const searchStocks = (e) => {
-    dispatch(filterStocks(e.target.value));
-  };
-
-  return (
-    <div className="home">
-      <input
-        type="text"
-        className="home__input"
-        placeholder="Search for a stock"
-        onChange={searchStocks}
-      />
-      {checkStocks()}
     </div>
-  );
+    {state.length > 12 ? displayFiltered : displayStocks}
+  </div>
+);
 };
 
 export default Home;
