@@ -14,15 +14,22 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <NavLink to="/" className="navbar-link" onClick={returnClick}>
-        <MdKeyboardArrowLeft className="navbar-icon" />
+        asdfasdf
       </NavLink>
       <h2 className="navbar-title">Stock Market WebApp</h2>
       <div className="navbar-search">
-        <MdSearch className="navbar-icon" />
-        <GoGear className="navbar-icon" />
+        asdfasdf
       </div>
     </nav>
   );
 };
+
+/*
+        <MdKeyboardArrowLeft className="navbar-icon" />
+
+        <MdSearch className="navbar-icon" />
+        <GoGear className="navbar-icon" />
+
+*/
 
 export default Navbar;

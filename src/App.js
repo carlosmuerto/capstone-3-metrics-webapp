@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { useDispatch, useSelector } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import Home from './components/home/home';
 import Details from './components/details/details';
 import Navbar from './components/navbar/navbar';
 import store from './redux/configureStore';
+import { getStocks } from './redux/slices/stocksServices';
 
 const App = () => {
   const dispatch = useDispatch();
 
-  useEffect(async () => {
-    await dispatch(getStocks());
-  }, []);
+  useEffect(() => {
+    dispatch(getStocks());
+  }, [dispatch]);
 
-const state = useSelector((state) => state.homeReducer);
-const stocksList = state.slice(0, 12);
+  const state = useSelector((state) => state.home.stocks);
+  const stocksList = state.slice(0, 12);
 
-return (
+  return (
     <Provider store={store}>
       <Router>
         <header>

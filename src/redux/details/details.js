@@ -17,7 +17,8 @@ const initialState = {
   ],
 };
 
-export const detailsReducer = (state = initialState, action) => {
+// eslint-disable-next-line default-param-last
+const detailsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_DETAILS:
       return {
@@ -40,3 +41,5 @@ export const detailsReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export default detailsReducer;

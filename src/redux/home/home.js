@@ -1,14 +1,22 @@
 import { GET_STOCKS, GET_STOCKS_SUCCESS, GET_STOCKS_ERROR } from '../slices/stocksServices';
 
-const initialState = { stocks: [], pending: false, error: null };
+const initialState = {
+  stocks: [],
+  pending: false,
+  error: null,
+};
 
 const FILTER_STOCKS = 'FILTER_STOCKS';
 const RESTORE_STOCKS = 'RESTORE_STOCKS';
 
 const restoreStocks = (payload) => ({ type: RESTORE_STOCKS, payload });
 
-const filterStocks = (newArray, savedStocks) => ({ type: FILTER_STOCKS, payload: [newArray, savedStocks] });
+const filterStocks = (newArray, savedStocks) => ({
+  type: FILTER_STOCKS,
+  payload: [newArray, savedStocks],
+});
 
+// eslint-disable-next-line default-param-last
 const homeReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_STOCKS:
@@ -16,24 +24,24 @@ const homeReducer = (state = initialState, action) => {
         ...state,
         pending: true,
       };
-    case GET_STOCKS_SUCCESS:
-      {
-        const data = action.stocks;
-        const subset = [];
-        data.map((stock) => {
-          subset.push({
-            symbol: stock.symbol,
-            price: stock.price,
-            name: stock.name,
-            exchange: stock.exchangeShortName,
-          });
+    case GET_STOCKS_SUCCESS: {
+      const data = action.payload;
+      const subset = [];
+      data.forEach((stock) => {
+        subset.push({
+          str: stock,
+          symbol: stock.symbol,
+          price: stock.price,
+          name: stock.name,
+          exchange: stock.exchangeShortName,
         });
-        return { 
-          ...state,
-          pending: false,
-          stocks: subset,
-        };
-      }
+      });
+      return {
+        ...state,
+        pending: false,
+        stocks: subset,
+      };
+    }
     case GET_STOCKS_ERROR:
       return {
         ...state,

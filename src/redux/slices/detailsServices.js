@@ -4,7 +4,7 @@ const apiKey = '?apikey=cec71bb490150a3c8d68e3c66b2f0a02';
 const detailsApi = 'https://financialmodelingprep.com/api/v3/quote/';
 
 const GET_DETAILS = 'GET_DETAILS';
-const GET_DETAILS_SUCCESS= 'GET_DETAILS_SUCCESS';
+const GET_DETAILS_SUCCESS = 'GET_DETAILS_SUCCESS';
 const GET_DETAILS_ERROR = 'GET_DETAILS_ERROR';
 
 const detailsStock = (symbol) => async (dispatch) => {
@@ -17,4 +17,6 @@ const detailsStock = (symbol) => async (dispatch) => {
   }
 };
 
-export { detailsStock, GET_DETAILS, GET_DETAILS_ERROR, GET_DETAILS_SUCCESS };
+export {
+  detailsStock, GET_DETAILS, GET_DETAILS_ERROR, GET_DETAILS_SUCCESS,
+};

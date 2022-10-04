@@ -45,14 +45,28 @@ const Details = () => {
         <div className="details-symbol">{state.symbol}</div>
         <div className="details-price">
           {state.price.toFixed(2)}
-          {(state.change > 0) 
-          ? <span className="details-change-positive"> +{state.change.toFixed(2)}</span>
-          : <span className="details-change-negative"> {state.change.toFixed(2)}</span>
-          }
+          {(state.change > 0)
+            ? (
+              <span className="details-change-positive">
+                {' '}
+                +
+                {state.change.toFixed(2)}
+              </span>
+            )
+            : (
+              <span className="details-change-negative">
+                {' '}
+                {state.change.toFixed(2)}
+              </span>
+            )}
         </div>
       </div>
       <div className="details-sub">
-        <p className="details-sub-title">{state.name}: </p>
+        <p className="details-sub-title">
+          {state.name}
+          :
+          {' '}
+        </p>
       </div>
     </div>
   );
