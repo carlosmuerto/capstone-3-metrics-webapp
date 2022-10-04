@@ -17,4 +17,4 @@ const detailsStock = (symbol) => async (dispatch) => {
   }
 };
 
-export { detailsStock, GET_DETAILS, DETAILS_STOCK, GET_DETAILS_ERROR };
+export { detailsStock, GET_DETAILS, GET_DETAILS_ERROR, GET_DETAILS_SUCCESS };

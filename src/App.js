@@ -1,18 +1,30 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import Home from './components/home/home';
+import Details from './components/details/details';
+import Navbar from './components/navbar/navbar';
+import store from './redux/configureStore';
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(async () => {
+    await dispatch(getStocks());
+  }, [dispatch]);
+
   return (
-    <div className="App">
+    <Provider store={store}>
       <Router>
-        <header className="header">
-          <Navbar />
-        </header>
-        <Switch>
-          <Route path="/" exact component={Home} />
-        </Switch>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/details" element={<Details />} />
+        </Routes>
       </Router>
-    </div>
+    </Provider>
   );
-}
+};
 
 export default App;

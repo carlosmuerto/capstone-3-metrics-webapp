@@ -1,8 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { MdSearch, MdKeyboardArrowLeft } from 'react-icons/md';
 import { useSelector, useDispatch } from 'react-redux';
-import 'App.css';
 import { restoreStocks } from '../../redux/home/home';
 
 const Navbar = () => {
