@@ -9,7 +9,7 @@ const restoreStocks = (payload) => ({ type: RESTORE_STOCKS, payload });
 
 const filterStocks = (newArray, savedStocks) => ({ type: FILTER_STOCKS, payload: [newArray, savedStocks] });
 
-const stocksReducer = (state = initialState, action) => {
+const homeReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_STOCKS:
       return {
@@ -58,4 +58,4 @@ const stocksReducer = (state = initialState, action) => {
   }
 };
 
-export { stocksReducer, filterStocks, restoreStocks };
+export { homeReducer, filterStocks, restoreStocks };

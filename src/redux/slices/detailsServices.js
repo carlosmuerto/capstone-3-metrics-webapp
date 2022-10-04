@@ -1,7 +1,7 @@
 import axios from 'axios';
 
+const apiKey = '?apikey=cec71bb490150a3c8d68e3c66b2f0a02';
 const detailsApi = 'https://financialmodelingprep.com/api/v3/quote/';
-const apiKey = 'cec71bb490150a3c8d68e3c66b2f0a02';
 
 const GET_DETAILS = 'GET_DETAILS';
 const GET_DETAILS_SUCCESS= 'GET_DETAILS_SUCCESS';

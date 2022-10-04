@@ -2,8 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { restoreStocks } from '../../redux/home/home';
-import { MdKeyboardArrowLeft, MdSearch } from 'react-icons/md';
-import { GoGear } from 'react-icons/go';
 
 const Navbar = () => {
   const state = useSelector((state) => state);

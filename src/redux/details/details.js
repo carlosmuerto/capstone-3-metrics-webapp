@@ -1,4 +1,4 @@
-import { GET_DETAILS, GET_DETAILS_SUCCESS, GET_DETAILS_ERROR } from './detailsServices';
+import { GET_DETAILS, GET_DETAILS_SUCCESS, GET_DETAILS_ERROR } from '../slices/detailsServices';
 
 const initialState = {
   details: [
@@ -17,7 +17,7 @@ const initialState = {
   ],
 };
 
-const detailsReducer = (state = initialState, action) => {
+export const detailsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_DETAILS:
       return {
@@ -39,6 +39,4 @@ const detailsReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
-
-export default detailsReducer;
+};

@@ -5,7 +5,7 @@ import { filterStocks } from '../../redux/home/home';
 import { detailsStock } from '../../redux/slices/detailsServices';
 
 const Home = () => {
-const state = useSelector((state) => state);
+const state = useSelector((state) => state.homeReducer.stocks);
 const dispatch = useDispatch();
 
 const clickEvent = (e) => {

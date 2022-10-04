@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const Details = () => {
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.detailsReducer.details[0]);
 
   const detailsTitles = [
     'Previous Close',
@@ -14,12 +14,12 @@ const Details = () => {
   ];
 
   const detailsData = [
-    state.stockDetails.previousClose,
-    state.stockDetails.dayHigh,
-    state.stockDetails.dayLow,
-    state.stockDetails.yearHigh,
-    state.stockDetails.yearLow,
-    state.stockDetails.exchange,
+    state.previousClose,
+    state.dayHigh,
+    state.dayLow,
+    state.yearHigh,
+    state.yearLow,
+    state.exchange,
   ];
 
   const size = detailsData.length;
@@ -40,28 +40,27 @@ const Details = () => {
   }
 
   const showDetails = (
-    <div key={state.stockDetails.symbol} className="details-container">
+    <div key={state.symbol} className="details-container">
       <div className="details-main">
-        <div className="details-symbol">{state.stockDetails.symbol}</div>
+        <div className="details-symbol">{state.symbol}</div>
         <div className="details-price">
-          {state.stockDetails.price.toFixed(2)}
-          {(state.stockDetails.change > 0)
-            ? <span className="details-change-positive">{` +${state.stockDetails.change.toFixed(2)}`}</span>
-            : <span className="details-change-negative">{` ${state.stockDetails.change.toFixed(2)}`}</span>}
+          {state.price.toFixed(2)}
+          {(state.change > 0) 
+          ? <span className="details-change-positive"> +{state.change.toFixed(2)}</span>
+          : <span className="details-change-negative"> {state.change.toFixed(2)}</span>
+          }
         </div>
       </div>
       <div className="details-sub">
-        <p className="details-sub-title">{state.stockDetails.name}: </p>
+        <p className="details-sub-title">{state.name}: </p>
       </div>
     </div>
   );
 
   return (
-    <div className="details-container">
+    <div className="details-wrapper">
       {showDetails}
-      <div className="details-info">
-        {details}
-      </div>
+      {details}
     </div>
   );
 };

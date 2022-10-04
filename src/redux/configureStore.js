@@ -1,13 +1,13 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
-
-const rootReducer = combineReducers({
-  details: detailsReducer,
-  home: homeReducer,
-});
+import { homeReducer } from './home/home';
+import { detailsReducer } from './details/details';
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    home: homeReducer,
+    details: detailsReducer,
+  },
   middleware: [thunk],
 });
 
